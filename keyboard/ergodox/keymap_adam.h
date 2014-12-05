@@ -23,92 +23,27 @@ static const uint8_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      *
      *
      *
-     ****************************************************************************************************
-     *
-     * Under XOrg, I use my own mapping from QWERTY to "Workman for Programmers"
-     * See XOrg files in ./addons/ subdirectory.
-     *
-     * I have to do so, because of two things:
-     * 1) my native language is Russian, and XOrg keymap for it is based on QWERTY layout
-     * 2) I want to have non-standart shifted keys, like $ (as normal) and @ (as shifted), or _ and -
-     *
-     * And even if (2) could be solved using FN* keys (but there is limit in firmware for only 32 such
-     * keys), then (1) can't be solved at firmware level at all.
-     *
-     * So, I have to stick with QWERTY as my main layout + my own XOrg keyboard layout for English.
-     * But sometimes I have to input something when XOrg is not active - for example, in Linux console,
-     * or in firmware console (while debugging firmware), or when keyboard is connected to not my computer.
-     *
-     * For such cases I have Layer1 :)
-     * // hint: switch to Layer1 is only at Layer6
-     *
-     ****************************************************************************************************
-     *
-     *
-     *
-     * Keymap: Default Layer in Workman
-     *
-     * ,--------------------------------------------------.           ,--------------------------------------------------.
-     * |  ~     |   ;  |   !  |   #  |   {  |   }  |   '  |           |   ^  |   [  |   ]  |   *  |   (  |   )  |   =    |
-     * |--------+------+------+------+------+-------------|           |------+------+------+------+------+------+--------|
-     * | Tab    |   Q  |   D  |   R  |   W  |   B  |  NO  |           | ~L7  |   J  |   F  |   U  |   P  |   $  |   :    |
-     * |--------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
-     * | Tab/Shf|   A  |   S  |   H  |   T  |   G  |------|           |------|   Y  |   N  |   E  |   O  |   I  |   -    |
-     * |--------+------+------+------+------+------| Home |           | End  |------+------+------+------+------+--------|
-     * | LCtrl  |   Z  |   X  |   M  |   C  |   V  |      |           |      |   K  |   L  |   ,  |   .  |   /  |   |    |
-     * `--------+------+------+------+------+-------------'           `-------------+------+------+------+------+--------'
-     *   | ~L5  | ~L2  | Caps | LAlt | LGui |                                       |  Lft |  Up  |  Dn  | Rght | ~L6  |
-     *   `----------------------------------'                                       `----------------------------------'
-     *                                        ,-------------.       ,-------------.
-     *                                        |  L0  |  +L2 |       | PgUp | Del  |
-     *                                 ,------|------|------|       |------+------+------.
-     *                                 |      |      |  NO  |       | PgDn |      |      |
-     *                                 | BkSp |  ESC |------|       |------| Enter| Space|
-     *                                 |      |      |  Spc |       | Ins  |      |      |
-     *                                 `--------------------'       `--------------------'
-     *
-     * Keymap: Default Layer in Workman / with Shift
-     *
-     * ,--------------------------------------------------.           ,--------------------------------------------------.
-     * |  `     |   1  |   2  |   3  |   4  |   5  |   "  |           |   \  |   6  |   7  |   8  |   9  |   0  |   +    |
-     * |--------+------+------+------+------+-------------|           |------+------+------+------+------+------+--------|
-     * | Tab    |   Q  |   D  |   R  |   W  |   B  |  NO  |           | ~L7  |   J  |   F  |   U  |   P  |   @  |   %    |
-     * |--------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
-     * | Tab/Shf|   A  |   S  |   H  |   T  |   G  |------|           |------|   Y  |   N  |   E  |   O  |   I  |   _    |
-     * |--------+------+------+------+------+------| Home |           | End  |------+------+------+------+------+--------|
-     * | LCtrl  |   Z  |   X  |   M  |   C  |   V  |      |           |      |   K  |   L  |   ,  |   .  |   /  |   &    |
-     * `--------+------+------+------+------+-------------'           `-------------+------+------+------+------+--------'
-     *   | ~L5  | ~L2  | Caps | LAlt | LGui |                                       |  Lft |  Up  |  Dn  | Rght | ~L6  |
-     *   `----------------------------------'                                       `----------------------------------'
-     *                                        ,-------------.       ,-------------.
-     *                                        |  L0  |  +L2 |       | PgUp | Del  |
-     *                                 ,------|------|------|       |------+------+------.
-     *                                 |      |      |  NO  |       | PgDn |      |      |
-     *                                 | BkSp |  ESC |------|       |------| Enter| Space|
-     *                                 |      |      |  Spc |       | Ins  |      |      |
-     *                                 `--------------------'       `--------------------'
-     *
      */
 
     KEYMAP(  // Layer0: default, leftled:none
         // left hand
-        GRV, 1,   2,   3,   4,   5,   BSLS,
-        FN2, Q,   W,   E,   R,   T,   FN23,
-        FN11,FN28,FN29,FN30,FN31,G,
-        FN12,FN24,FN25,FN26,FN27,B,   HOME,
-        FN21,FN20,CAPS,FN13,FN14,
-                                      FN17,FN19,
-                                           NO,
-                                 FN5, FN6, FN7,
+        ESC,    1,  2,   3,   4,   5,   MINS,
+        LALT,   Q,  W,   E,   R,   T,   TAB,
+        LCTRL,  A,  S,   D,   F,   G,
+        LSHIFT, Z,  X,   C,   V,   B,   BSPC,
+        BSLS,HOME,PGDN,PGUP,END,
+                                      ESC,LBRC,
+                                           MINS,
+                                 SPC, ENT, NO,
         // right hand
-             MINS,6,   7,   8,   9,   0,   EQL,
-             FN23,Y,   U,   I,   O,   P,   LBRC,
-                  H,   J,   K,   L,   SCLN,FN15,
-             END, N,   M,   COMM,DOT, SLSH,FN16,
-                       LEFT,UP,  DOWN,RGHT,FN22,
-        PGUP,DEL,
-        PGDN,
-        FN8, FN9, FN10
+             EQL,    6,   7,   8,   9,   0,   EQL,
+             TAB,    Y,   U,   I,   O,   P,   RALT,
+                     H,   J,   K,   L,   SCLN,RCTRL,
+             DELETE, N,   M,   COMM,DOT, QUOT,RSHIFT,
+                       LEFT,DOWN,  UP,RGHT,SLSH,
+        RBRC,ESC,
+        EQL,
+        NO, ENT, SPC
     ),
 
     KEYMAP(  // Layer1: Workman layout, leftled:all
