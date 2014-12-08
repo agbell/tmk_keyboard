@@ -28,18 +28,18 @@ static const uint8_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KEYMAP(  // Layer0: default, leftled:none
         // left hand
         ESC,    1,  2,   3,   4,   5,   MINS,
-        LALT,   Q,  W,   E,   R,   T,   TAB,
-        LCTRL,  A,  S,   D,   F,   G,
-        LSHIFT, Z,  X,   C,   V,   B,   BSPC,
+        LALT,   Q,  W,   E,   FN3,   T,   TAB,
+        LCTRL,  A,  S,   D,   FN4,   G,
+        LSHIFT, Z,  X,   C,   FN5,   B,   BSPC,
         BSLS,HOME,PGDN,PGUP,END,
                                       ESC,LBRC,
                                            MINS,
                                  SPC, ENT, NO,
         // right hand
              EQL,    6,   7,   8,   9,   0,   EQL,
-             TAB,    Y,   U,   I,   O,   P,   RALT,
-                     H,   J,   K,   L,   SCLN,RCTRL,
-             DELETE, N,   M,   COMM,DOT, QUOT,RSHIFT,
+             TAB,    Y,   FN0,   I,   O,   P,   RALT,
+                     H,   FN1,   K,   L,   SCLN,RCTRL,
+             DELETE, N,   FN2,   COMM,DOT, QUOT,RSHIFT,
                        LEFT,DOWN,  UP,RGHT,SLSH,
         RBRC,ESC,
         EQL,
@@ -314,14 +314,14 @@ enum macro_id {
  * Fn action definition
  */
 static const uint16_t PROGMEM fn_actions[] = {
-    [0] =   ACTION_FUNCTION(TEENSY_KEY),                    // FN0  - Teensy key
-
-    [1] =   ACTION_MODS_KEY(MOD_LSFT, KC_BSLS),             // FN1  = Shifted BackSlash // " in Workman
-    [2] =   ACTION_MODS_KEY(MOD_LSFT, KC_MINS),             // FN2  = Shifted Minus     // \ in Workman
-    [3] =   ACTION_MODS_KEY(MOD_LSFT, KC_COMM),             // FN3  = Shifted comma     // < in Workman
-    [4] =   ACTION_MODS_KEY(MOD_LSFT, KC_DOT),              // FN4  = Shifted dot       // > in Workman
-
-    [5] =   ACTION_MODS_TAP_KEY(MOD_LCTL, KC_BSPC),         // FN5  = LShift with tap BackSpace
+    [0] =   ACTION_MODS_TAP_KEY(MOD_RALT, KC_U),            // FN0  - ALT + U
+    [1] =   ACTION_MODS_TAP_KEY(MOD_RCTL, KC_J),            // FN1  - CTRL + J
+    [2] =   ACTION_MODS_TAP_KEY(MOD_RSFT, KC_M),            // FN2  - SHIFT + M
+    [3] =   ACTION_MODS_TAP_KEY(MOD_LALT, KC_R),            // FN3  - ALT + R
+    [4] =   ACTION_MODS_TAP_KEY(MOD_LCTL, KC_F),            // FN4  - CTRL + F
+    [5] =   ACTION_MODS_TAP_KEY(MOD_LSFT, KC_V),            // FN5  - SHIFT + V
+    
+    
     [6] =   ACTION_MODS_TAP_KEY(MOD_LSFT, KC_DEL),          // FN6  = LCtrl  with tap Delete
     [7] =   ACTION_MODS_TAP_KEY(MOD_LALT, KC_ESC),          // FN7  = LAlt   with tap Escape
     [8] =   ACTION_MODS_TAP_KEY(MOD_RALT, KC_INS),          // FN8  = RAlt   with tap Ins
