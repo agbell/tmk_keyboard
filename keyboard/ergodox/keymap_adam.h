@@ -37,7 +37,7 @@ static const uint8_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                  SPC, ENT, NO,
         // right hand
              EQL,    6,   7,   8,   9,   0,   EQL,
-             TAB,    Y,   U,   I,   O,   P,   FN6,
+             TAB,    Y,   U,   I,   O,   P,   FN13,
                      H,   J,   K,   L,   SCLN,FN7,
              DELETE, N,   M,   COMM,DOT, QUOT,RSHIFT,
                        LEFT,DOWN,  UP,RGHT,SLSH,
@@ -317,6 +317,7 @@ static const uint16_t PROGMEM fn_actions[] = {
     [10] =   ACTION_MODS_TAP_KEY(MOD_LCTL, KC_LBRC),            // FN10 - CTRL + F
     [11] =   ACTION_MODS_TAP_KEY(MOD_LSFT, KC_V),            // FN11  - SHIFT + V
     [12] =  ACTION_FUNCTION_TAP(LALT_LPAREN), 
+    [13] =  ACTION_FUNCTION_TAP(RALT_RPAREN), 
     // [6] =   ACTION_MODS_TAP_KEY(MOD_LSFT, KC_DEL),          // FN6  = LCtrl  with tap Delete
     // [7] =   ACTION_MODS_TAP_KEY(MOD_LALT, KC_ESC),          // FN7  = LAlt   with tap Escape
     // [8] =   ACTION_MODS_TAP_KEY(MOD_RALT, KC_INS),          // FN8  = RAlt   with tap Ins
@@ -392,6 +393,33 @@ void action_function(keyrecord_t *record, uint8_t id, uint8_t opt)
                     record->tap.count = 0;  // ad hoc: cancel tap
                 } else {
                     unregister_mods(MOD_BIT(KC_LALT));
+                }
+            }
+            break;
+            case RALT_RPAREN:
+            // Shift parentheses example: LShft + tap '('
+            // http://stevelosh.com/blog/2012/10/a-modern-space-cadet/#shift-parentheses
+            // http://geekhack.org/index.php?topic=41989.msg1304899#msg1304899
+            if (record->event.pressed) {
+                if (record->tap.count > 0 && !record->tap.interrupted) {
+                    if (record->tap.interrupted) {
+                        dprint("tap interrupted\n");
+                        register_mods(MOD_BIT(KC_RALT));
+                    }
+                } else {
+                    register_mods(MOD_BIT(KC_RALT));
+                }
+            } else {
+                if (record->tap.count > 0 && !(record->tap.interrupted)) {
+                    add_weak_mods(MOD_BIT(KC_RSHIFT));
+                    send_keyboard_report();
+                    register_code(KC_0);
+                    unregister_code(KC_0);
+                    del_weak_mods(MOD_BIT(KC_RSHIFT));
+                    send_keyboard_report();
+                    record->tap.count = 0;  // ad hoc: cancel tap
+                } else {
+                    unregister_mods(MOD_BIT(KC_RALT));
                 }
             }
             break;
