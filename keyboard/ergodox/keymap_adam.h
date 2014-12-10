@@ -48,8 +48,8 @@ static const uint8_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     KEYMAP(  // LayerN: fully transparent
         // left hand
-        TRNS,F1,F2,F3,F4,F5,F11,
-        TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,
+        TRNS,F1  ,F2  ,F3  ,F4  ,F5  ,F11,
+        TRNS,TRNS,TRNS,TRNS,F   ,TRNS,TRNS,
         TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,
         TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,
         TRNS,TRNS,TRNS,TRNS,TRNS,
@@ -57,9 +57,9 @@ static const uint8_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                            TRNS,
                                  TRNS,TRNS,TRNS,
         // right hand
-             F12,F6,F7,F8,F9,F10,TRNS,
+             F12 ,F6  ,F7  ,F8  ,F9  ,F10 ,TRNS,
              TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,
-                  TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,
+                  LEFT,DOWN,UP, RIGHT,TRNS,TRNS,
              TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,
                        TRNS,TRNS,TRNS,TRNS,TRNS,
         TRNS,TRNS,
