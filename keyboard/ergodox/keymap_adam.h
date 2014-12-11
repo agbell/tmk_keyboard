@@ -27,7 +27,7 @@ static const uint8_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     KEYMAP(  // Layer0: default, leftled:none
         // left hand
-        ESC,    1,  2,   3,   4,   5,   MINS,
+        FN17,    1,  2,   3,   4,   5,   MINS,
         FN12,   Q,  W,   E,   R,   T,   TAB,
         FN10,  A,  S,   D,   FN16,   G,
         FN15, Z,  X,   C,   V,   B,   BSPC,
@@ -58,9 +58,9 @@ static const uint8_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                  TRNS,TRNS,TRNS,
         // right hand
              F12 ,F6  ,F7  ,F8  ,F9  ,F10 ,TRNS,
-             TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,
+             TRNS,TRNS,HOME,PGUP,TRNS,TRNS,TRNS,
                   LEFT,DOWN,UP, RIGHT,TRNS,TRNS,
-             TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,
+             TRNS,TRNS,END,PGDOWN,TRNS,TRNS,TRNS,
                        TRNS,TRNS,TRNS,TRNS,TRNS,
         TRNS,TRNS,
         TRNS,
@@ -140,6 +140,7 @@ static const uint16_t PROGMEM fn_actions[] = {
     [14] =  ACTION_MODS_ONESHOT(MOD_LSFT), 
     [15] =  ACTION_MODS_ONESHOT(MOD_LSFT), 
     [16] =  ACTION_LAYER_TAP_KEY(1, KC_F),
+    [17] =   ACTION_MODS_TAP_KEY(MOD_LGUI, KC_ESC),  
     // [6] =   ACTION_MODS_TAP_KEY(MOD_LSFT, KC_DEL),          // FN6  = LCtrl  with tap Delete
     // [7] =   ACTION_MODS_TAP_KEY(MOD_LALT, KC_ESC),          // FN7  = LAlt   with tap Escape
     // [8] =   ACTION_MODS_TAP_KEY(MOD_RALT, KC_INS),          // FN8  = RAlt   with tap Ins
