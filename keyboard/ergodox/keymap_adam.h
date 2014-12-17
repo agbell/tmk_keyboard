@@ -28,8 +28,8 @@ static const uint8_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KEYMAP(  // Layer0: default, leftled:none
         // left hand
         FN17,    1,  2,   3,   4,   5,   MINS,
-        FN12,   Q,  W,   E,   R,   T,   TAB,
-        FN10,  A,  S,   D,   FN16,   G,
+        FN10,   Q,  W,   E,   R,   T,   TAB,
+        FN12,  A,  S,   D,   FN16,   G,
         FN15, Z,  X,   C,   V,   B,   BSPC,
         BSLS,HOME,PGDN,PGUP,END,
                                       ESC,LBRC,
@@ -37,8 +37,8 @@ static const uint8_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                  SPC, ENT, NO,
         // right hand
              EQL,    6,   7,   8,   9,   0,   EQL,
-             TAB,    Y,   U,   I,   O,   P,   FN13,
-                     H,   J,   K,   L,   SCLN,FN7,
+             TAB,    Y,   U,   I,   O,   P,   FN7,
+                     H,   J,   K,   L,   SCLN,FN13,
              DELETE, N,   M,   COMM,DOT, QUOT,FN15,
                        LEFT,DOWN,  UP,RGHT,SLSH,
         RBRC,ESC,
@@ -113,8 +113,8 @@ static const uint8_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 };
 enum function_id {
-    LALT_LPAREN,
-    RALT_RPAREN
+    LCTL_LPAREN,
+    RCTL_LPAREN
 };
 
 /*
@@ -129,13 +129,13 @@ static const uint16_t PROGMEM fn_actions[] = {
     [5] =   ACTION_MODS_TAP_KEY(MOD_LSFT, KC_V),            // FN5  - SHIFT + V
     
     [6] =   ACTION_MODS_TAP_KEY(MOD_RALT, KC_0),            // FN6  - ALT + U
-    [7] =   ACTION_MODS_TAP_KEY(MOD_RCTL, KC_RBRC),            // FN7  - CTRL + J
+    [7] =   ACTION_MODS_TAP_KEY(MOD_RALT, KC_RBRC),            // FN7  - CTRL + J
     [8] =   ACTION_MODS_TAP_KEY(MOD_RSFT, KC_M),            // FN8  - SHIFT + M
     [9] =   ACTION_MODS_TAP_KEY(MOD_LALT, KC_R),            // FN9  - ALT + R
-    [10] =   ACTION_MODS_TAP_KEY(MOD_LCTL, KC_LBRC),            // FN10 - CTRL + F
+    [10] =   ACTION_MODS_TAP_KEY(MOD_LALT, KC_LBRC),            // FN10 - CTRL + F
     [11] =   ACTION_MODS_TAP_KEY(MOD_LSFT, KC_V),            // FN11  - SHIFT + V
-    [12] =  ACTION_FUNCTION_TAP(LALT_LPAREN), 
-    [13] =  ACTION_FUNCTION_TAP(RALT_RPAREN), 
+    [12] =  ACTION_FUNCTION_TAP(LCTL_LPAREN), 
+    [13] =  ACTION_FUNCTION_TAP(RCTL_LPAREN), 
     
     [14] =  ACTION_MODS_ONESHOT(MOD_LSFT), 
     [15] =  ACTION_MODS_ONESHOT(MOD_LSFT), 
@@ -192,7 +192,7 @@ void action_function(keyrecord_t *record, uint8_t id, uint8_t opt)
     dprint("\n");
 
     switch (id) {
-        case LALT_LPAREN:
+        case LCTL_LPAREN:
             // Shift parentheses example: LShft + tap '('
             // http://stevelosh.com/blog/2012/10/a-modern-space-cadet/#shift-parentheses
             // http://geekhack.org/index.php?topic=41989.msg1304899#msg1304899
@@ -200,26 +200,26 @@ void action_function(keyrecord_t *record, uint8_t id, uint8_t opt)
                 if (record->tap.count > 0 && !record->tap.interrupted) {
                     if (record->tap.interrupted) {
                         dprint("tap interrupted\n");
-                        register_mods(MOD_BIT(KC_LALT));
+                        register_mods(MOD_BIT(KC_LCTL));
                     }
                 } else {
-                    register_mods(MOD_BIT(KC_LALT));
+                    register_mods(MOD_BIT(KC_LCTL));
                 }
             } else {
                 if (record->tap.count > 0 && !(record->tap.interrupted)) {
                     add_weak_mods(MOD_BIT(KC_LSHIFT));
                     send_keyboard_report();
-                    register_code(KC_9);
-                    unregister_code(KC_9);
+                    register_code(KC_LBRACKET);
+                    unregister_code(KC_LBRACKET);
                     del_weak_mods(MOD_BIT(KC_LSHIFT));
                     send_keyboard_report();
                     record->tap.count = 0;  // ad hoc: cancel tap
                 } else {
-                    unregister_mods(MOD_BIT(KC_LALT));
+                    unregister_mods(MOD_BIT(KC_LCTL));
                 }
             }
             break;
-            case RALT_RPAREN:
+            case RCTL_LPAREN:
             // Shift parentheses example: LShft + tap '('
             // http://stevelosh.com/blog/2012/10/a-modern-space-cadet/#shift-parentheses
             // http://geekhack.org/index.php?topic=41989.msg1304899#msg1304899
@@ -227,22 +227,22 @@ void action_function(keyrecord_t *record, uint8_t id, uint8_t opt)
                 if (record->tap.count > 0 && !record->tap.interrupted) {
                     if (record->tap.interrupted) {
                         dprint("tap interrupted\n");
-                        register_mods(MOD_BIT(KC_RALT));
+                        register_mods(MOD_BIT(KC_RCTL));
                     }
-                } else {
-                    register_mods(MOD_BIT(KC_RALT));
+                } else {\
+                    register_mods(MOD_BIT(KC_RCTL));
                 }
             } else {
                 if (record->tap.count > 0 && !(record->tap.interrupted)) {
                     add_weak_mods(MOD_BIT(KC_RSHIFT));
                     send_keyboard_report();
-                    register_code(KC_0);
-                    unregister_code(KC_0);
+                    register_code(KC_RBRACKET);
+                    unregister_code(KC_RBRACKET);
                     del_weak_mods(MOD_BIT(KC_RSHIFT));
                     send_keyboard_report();
                     record->tap.count = 0;  // ad hoc: cancel tap
                 } else {
-                    unregister_mods(MOD_BIT(KC_RALT));
+                    unregister_mods(MOD_BIT(KC_RCTL));
                 }
             }
             break;
