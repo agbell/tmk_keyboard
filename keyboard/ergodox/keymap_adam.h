@@ -38,7 +38,7 @@ static const uint8_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         // right hand
              EQL,    6,   7,   8,   9,   0,   EQL,
              TAB,    Y,   U,   I,   O,   P,   FN7,
-                     H,   J,   K,   L,   SCLN,FN13,
+                     H,   FN18,   K,   L,   SCLN,FN13,
              DELETE, N,   M,   COMM,DOT, QUOT,FN15,
                        LEFT,DOWN,  UP,RGHT,SLSH,
         RBRC,ESC,
@@ -46,16 +46,16 @@ static const uint8_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         NO, ENT, SPC
     ),
 
-    KEYMAP(  // LayerN: fully transparent
+    KEYMAP(  // Layer F lock
         // left hand
         TRNS,F1  ,F2  ,F3  ,F4  ,F5  ,F11,
-        TRNS,TRNS,TRNS,TRNS,F   ,TRNS,TRNS,
+        TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,
         TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,
         TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,
         TRNS,TRNS,TRNS,TRNS,TRNS,
                                       TRNS,TRNS,
                                            TRNS,
-                                 TRNS,TRNS,TRNS,
+                                 F,TRNS,TRNS,
         // right hand
              F12 ,F6  ,F7  ,F8  ,F9  ,F10 ,TRNS,
              TRNS,TRNS,HOME,PGUP,TRNS,TRNS,TRNS,
@@ -64,7 +64,27 @@ static const uint8_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                        TRNS,TRNS,TRNS,TRNS,TRNS,
         TRNS,TRNS,
         TRNS,
-        TRNS,TRNS,TRNS
+        TRNS,TRNS,F
+    ),
+     KEYMAP(  // Layer J lock
+        // left hand
+        TRNS,F1  ,F2  ,F3  ,F4  ,F5  ,F11,
+        TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,
+        TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,
+        TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,
+        TRNS,TRNS,TRNS,TRNS,TRNS,
+                                      TRNS,TRNS,
+                                           TRNS,
+                                 J,TRNS,TRNS,
+        // right hand
+             F12 ,F6  ,F7  ,F8  ,F9  ,F10 ,TRNS,
+             TRNS,TRNS,HOME,PGUP,TRNS,TRNS,TRNS,
+                  LEFT,TRNS,UP, RIGHT,TRNS,TRNS,
+             TRNS,TRNS,END,PGDOWN,TRNS,TRNS,TRNS,
+                       TRNS,TRNS,TRNS,TRNS,TRNS,
+        TRNS,TRNS,
+        TRNS,
+        TRNS,TRNS,J
     ),
 /*
     // templates to copy from
@@ -140,7 +160,8 @@ static const uint16_t PROGMEM fn_actions[] = {
     [14] =  ACTION_MODS_ONESHOT(MOD_LSFT), 
     [15] =  ACTION_MODS_ONESHOT(MOD_LSFT), 
     [16] =  ACTION_LAYER_TAP_KEY(1, KC_F),
-    [17] =   ACTION_MODS_TAP_KEY(MOD_LGUI, KC_ESC),  
+    [17] =   ACTION_MODS_TAP_KEY(MOD_LGUI, KC_ESC), 
+    [18] =  ACTION_LAYER_TAP_KEY(2, KC_J),    
     // [6] =   ACTION_MODS_TAP_KEY(MOD_LSFT, KC_DEL),          // FN6  = LCtrl  with tap Delete
     // [7] =   ACTION_MODS_TAP_KEY(MOD_LALT, KC_ESC),          // FN7  = LAlt   with tap Escape
     // [8] =   ACTION_MODS_TAP_KEY(MOD_RALT, KC_INS),          // FN8  = RAlt   with tap Ins
