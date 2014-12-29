@@ -29,7 +29,7 @@ static const uint8_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         // left hand
         FN17,    1,  2,   3,   4,   5,   MINS,
         FN10,   Q,  W,   E,   R,   T,   TAB,
-        FN12,  A,  S,   D,   FN16,   G,
+        FN12,  A,  FN21,   FN19,   FN16,   G,
         FN15, Z,  X,   C,   V,   B,   BSPC,
         BSLS,FN0,FN2,PGUP,END,
                                       ESC,LBRC,
@@ -38,7 +38,7 @@ static const uint8_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         // right hand
              EQL,    6,   7,   8,   9,   0,   EQL,
              TAB,    Y,   U,   I,   O,   P,   FN7,
-                     H,   FN18,   K,   L,   SCLN,FN13,
+                     H,   FN18,   FN20,   FN22,   SCLN,FN13,
              DELETE, N,   M,   COMM,DOT, QUOT,FN15,
                        LEFT,DOWN,  FN3,FN1,SLSH,
         RBRC,ESC,
@@ -134,7 +134,11 @@ static const uint8_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 };
 enum function_id {
     LCTL_LPAREN,
-    RCTL_LPAREN
+    RCTL_LPAREN,
+    D_CTL,
+    K_CTL,
+    S_ALT,
+    L_ALT
 };
 
 /*
@@ -162,6 +166,10 @@ static const uint16_t PROGMEM fn_actions[] = {
     [16] =  ACTION_LAYER_TAP_KEY(1, KC_F),
     [17] =   ACTION_MODS_TAP_KEY(MOD_LGUI, KC_ESC), 
     [18] =  ACTION_LAYER_TAP_KEY(2, KC_J),    
+    [19] =  ACTION_FUNCTION_TAP(D_CTL), 
+    [20] =  ACTION_FUNCTION_TAP(K_CTL), 
+    [21] =  ACTION_FUNCTION_TAP(S_ALT), 
+    [22] =  ACTION_FUNCTION_TAP(L_ALT)
     // [6] =   ACTION_MODS_TAP_KEY(MOD_LSFT, KC_DEL),          // FN6  = LCtrl  with tap Delete
     // [7] =   ACTION_MODS_TAP_KEY(MOD_LALT, KC_ESC),          // FN7  = LAlt   with tap Escape
     // [8] =   ACTION_MODS_TAP_KEY(MOD_RALT, KC_INS),          // FN8  = RAlt   with tap Ins
@@ -264,6 +272,94 @@ void action_function(keyrecord_t *record, uint8_t id, uint8_t opt)
                     record->tap.count = 0;  // ad hoc: cancel tap
                 } else {
                     unregister_mods(MOD_BIT(KC_RCTL));
+                }
+            }
+            break;
+            case D_CTL:
+            // CTRL + tap 'D'
+            if (record->event.pressed) {
+                if (record->tap.count > 0 && !record->tap.interrupted) {
+                    if (record->tap.interrupted) {
+                        dprint("tap interrupted\n");
+                        register_mods(MOD_BIT(KC_RCTL));
+                    }
+                } else {\
+                    register_mods(MOD_BIT(KC_RCTL));
+                }
+            } else {
+                if (record->tap.count > 0 && !(record->tap.interrupted)) {
+                    register_code(KC_D);
+                    unregister_code(KC_D);
+                    send_keyboard_report();
+                    record->tap.count = 0;  // ad hoc: cancel tap
+                } else {
+                    unregister_mods(MOD_BIT(KC_RCTL));
+                }
+            }
+            break;
+            case K_CTL:
+            // CTRL + tap 'K'
+            if (record->event.pressed) {
+                if (record->tap.count > 0 && !record->tap.interrupted) {
+                    if (record->tap.interrupted) {
+                        dprint("tap interrupted\n");
+                        register_mods(MOD_BIT(KC_RCTL));
+                    }
+                } else {\
+                    register_mods(MOD_BIT(KC_RCTL));
+                }
+            } else {
+                if (record->tap.count > 0 && !(record->tap.interrupted)) {
+                    register_code(KC_K);
+                    unregister_code(KC_K);
+                    send_keyboard_report();
+                    record->tap.count = 0;  // ad hoc: cancel tap
+                } else {
+                    unregister_mods(MOD_BIT(KC_RCTL));
+                }
+            }
+            break;
+            case S_ALT:
+            // ALT + tap 'S'
+            if (record->event.pressed) {
+                if (record->tap.count > 0 && !record->tap.interrupted) {
+                    if (record->tap.interrupted) {
+                        dprint("tap interrupted\n");
+                        register_mods(MOD_BIT(KC_LALT));
+                    }
+                } else {\
+                    register_mods(MOD_BIT(KC_LALT));
+                }
+            } else {
+                if (record->tap.count > 0 && !(record->tap.interrupted)) {
+                    register_code(KC_S);
+                    unregister_code(KC_S);
+                    send_keyboard_report();
+                    record->tap.count = 0;  // ad hoc: cancel tap
+                } else {
+                    unregister_mods(MOD_BIT(KC_LALT));
+                }
+            }
+            break;
+             case L_ALT:
+            // ALT + tap 'L'
+            if (record->event.pressed) {
+                if (record->tap.count > 0 && !record->tap.interrupted) {
+                    if (record->tap.interrupted) {
+                        dprint("tap interrupted\n");
+                        register_mods(MOD_BIT(KC_LALT));
+                    }
+                } else {\
+                    register_mods(MOD_BIT(KC_LALT));
+                }
+            } else {
+                if (record->tap.count > 0 && !(record->tap.interrupted)) {
+                    register_code(KC_L);
+                    unregister_code(KC_L);
+                    send_keyboard_report();
+                    record->tap.count = 0;  // ad hoc: cancel tap
+                } else {
+                    unregister_mods(MOD_BIT(KC_LALT));
                 }
             }
             break;
