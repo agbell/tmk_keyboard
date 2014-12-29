@@ -29,7 +29,7 @@ static const uint8_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         // left hand
         FN17,    1,  2,   3,   4,   5,   MINS,
         FN10,   Q,  W,   E,   R,   T,   TAB,
-        FN12,  A,  FN21,   FN19,   FN16,   G,
+        FN12,  A,  S,   D,   FN16,   G,
         FN15, Z,  X,   C,   V,   B,   BSPC,
         BSLS,FN0,FN2,PGUP,END,
                                       ESC,LBRC,
@@ -38,7 +38,7 @@ static const uint8_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         // right hand
              EQL,    6,   7,   8,   9,   0,   EQL,
              TAB,    Y,   U,   I,   O,   P,   FN7,
-                     H,   FN18,   FN20,   FN22,   SCLN,FN13,
+                     H,   FN18,   K,   L,   SCLN,FN13,
              DELETE, N,   M,   COMM,DOT, QUOT,FN15,
                        LEFT,DOWN,  FN3,FN1,SLSH,
         RBRC,ESC,
@@ -215,10 +215,9 @@ static const uint16_t PROGMEM fn_actions[] = {
  */
 void action_function(keyrecord_t *record, uint8_t id, uint8_t opt)
 {
-    if (record->event.pressed) dprint("P"); else dprint("R");
-    dprintf("%d", record->tap.count);
-    if (record->tap.interrupted) dprint("i");
-    dprint("\n");
+    // if (record->event.pressed) print("Press"); else print("Release");
+    // if (record->tap.interrupted) print("interrupted");
+    // print("\n");
 
     switch (id) {
         case LCTL_LPAREN:
@@ -228,7 +227,7 @@ void action_function(keyrecord_t *record, uint8_t id, uint8_t opt)
             if (record->event.pressed) {
                 if (record->tap.count > 0 && !record->tap.interrupted) {
                     if (record->tap.interrupted) {
-                        dprint("tap interrupted\n");
+                        print("tap interrupted\n");
                         register_mods(MOD_BIT(KC_LCTL));
                     }
                 } else {
@@ -255,7 +254,7 @@ void action_function(keyrecord_t *record, uint8_t id, uint8_t opt)
             if (record->event.pressed) {
                 if (record->tap.count > 0 && !record->tap.interrupted) {
                     if (record->tap.interrupted) {
-                        dprint("tap interrupted\n");
+                        print("tap interrupted\n");
                         register_mods(MOD_BIT(KC_RCTL));
                     }
                 } else {\
@@ -276,23 +275,27 @@ void action_function(keyrecord_t *record, uint8_t id, uint8_t opt)
             }
             break;
             case D_CTL:
+            print("D_CTL\n");
             // CTRL + tap 'D'
             if (record->event.pressed) {
                 if (record->tap.count > 0 && !record->tap.interrupted) {
                     if (record->tap.interrupted) {
-                        dprint("tap interrupted\n");
+                        print("tap interrupted\n");
                         register_mods(MOD_BIT(KC_RCTL));
                     }
                 } else {\
+                    print("typing ctl on keypress\n");
                     register_mods(MOD_BIT(KC_RCTL));
                 }
             } else {
                 if (record->tap.count > 0 && !(record->tap.interrupted)) {
+                    print("typing d\n");
                     register_code(KC_D);
                     unregister_code(KC_D);
                     send_keyboard_report();
                     record->tap.count = 0;  // ad hoc: cancel tap
                 } else {
+                    print("typing ctl on release\n");
                     unregister_mods(MOD_BIT(KC_RCTL));
                 }
             }
@@ -302,7 +305,7 @@ void action_function(keyrecord_t *record, uint8_t id, uint8_t opt)
             if (record->event.pressed) {
                 if (record->tap.count > 0 && !record->tap.interrupted) {
                     if (record->tap.interrupted) {
-                        dprint("tap interrupted\n");
+                        print("tap interrupted\n");
                         register_mods(MOD_BIT(KC_RCTL));
                     }
                 } else {\
@@ -324,7 +327,7 @@ void action_function(keyrecord_t *record, uint8_t id, uint8_t opt)
             if (record->event.pressed) {
                 if (record->tap.count > 0 && !record->tap.interrupted) {
                     if (record->tap.interrupted) {
-                        dprint("tap interrupted\n");
+                        print("tap interrupted\n");
                         register_mods(MOD_BIT(KC_LALT));
                     }
                 } else {\
@@ -346,7 +349,7 @@ void action_function(keyrecord_t *record, uint8_t id, uint8_t opt)
             if (record->event.pressed) {
                 if (record->tap.count > 0 && !record->tap.interrupted) {
                     if (record->tap.interrupted) {
-                        dprint("tap interrupted\n");
+                        print("tap interrupted\n");
                         register_mods(MOD_BIT(KC_LALT));
                     }
                 } else {\

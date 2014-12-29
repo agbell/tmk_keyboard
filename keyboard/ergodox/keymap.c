@@ -89,6 +89,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "keymap_adam.h"
 #else
 
+debug_config.enable = true; // to enable debug print
+debug_config.matrix = true; // to enable matrix print
+debug_config.keyboard = true;  // to enable keyboard report print
+debug_config.mouse = true;  // to enable mouse report print
+
+
 static const uint8_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KEYMAP(  // layer 0 : default
         // left hand
