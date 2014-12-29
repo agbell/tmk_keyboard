@@ -31,7 +31,7 @@ static const uint8_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         FN10,   Q,  W,   E,   R,   T,   TAB,
         FN12,  A,  S,   D,   FN16,   G,
         FN15, Z,  X,   C,   V,   B,   BSPC,
-        BSLS,HOME,PGDN,PGUP,END,
+        BSLS,FN0,FN2,PGUP,END,
                                       ESC,LBRC,
                                            MINS,
                                  SPC, ENT, NO,
@@ -40,7 +40,7 @@ static const uint8_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
              TAB,    Y,   U,   I,   O,   P,   FN7,
                      H,   FN18,   K,   L,   SCLN,FN13,
              DELETE, N,   M,   COMM,DOT, QUOT,FN15,
-                       LEFT,DOWN,  UP,RGHT,SLSH,
+                       LEFT,DOWN,  FN3,FN1,SLSH,
         RBRC,ESC,
         EQL,
         NO, ENT, SPC
@@ -141,10 +141,10 @@ enum function_id {
  * Fn action definition
  */
 static const uint16_t PROGMEM fn_actions[] = {
-    [0] =   ACTION_MODS_TAP_KEY(MOD_RALT, KC_U),            // FN0  - ALT + U
-    [1] =   ACTION_MODS_TAP_KEY(MOD_RCTL, KC_J),            // FN1  - CTRL + J
-    [2] =   ACTION_MODS_TAP_KEY(MOD_RSFT, KC_M),            // FN2  - SHIFT + M
-    [3] =   ACTION_MODS_TAP_KEY(MOD_LALT, KC_R),            // FN3  - ALT + R
+    [0] =   ACTION_MODS_KEY(MOD_LALT | MOD_LSFT, KC_TAB),    // FN0  - shift alt tab
+    [1] =   ACTION_MODS_KEY(MOD_LALT, KC_TAB),              // FN1  - alt tab
+    [2] =   ACTION_MODS_KEY(MOD_LCTL | MOD_LSFT, KC_TAB),    // FN2  - shift ctl tab
+    [3] =   ACTION_MODS_KEY(MOD_LCTL, KC_TAB),              // FN3  - ctl tab
     [4] =   ACTION_MODS_TAP_KEY(MOD_LCTL, KC_F),            // FN4  - CTRL + F
     [5] =   ACTION_MODS_TAP_KEY(MOD_LSFT, KC_V),            // FN5  - SHIFT + V
     
