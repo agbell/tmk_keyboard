@@ -307,12 +307,18 @@ action_t keymap_fn_to_action(uint8_t keycode)
 {
     uint8_t layer = biton32(layer_state);
 
+    dprint("keymap_fn-to_action");
+    dprintf(keycode);
+    dprintf(layer);
+    dprintf("\n");
     action_t action;
     action.code = ACTION_NO;
 
     if ((layer == 1) && FN_INDEX(keycode) < FN_ACTIONS_CTL_SIZE) {
         action.code = pgm_read_word(&fn_actions_ctl[FN_INDEX(keycode)]);
-    }
+        
+        return action;
+    } 
 
     // by default, use fn_actions from default layer 0
     // this is needed to get mapping for same key, that was used switch to some layer,
