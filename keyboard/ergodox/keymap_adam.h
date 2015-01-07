@@ -308,9 +308,9 @@ action_t keymap_fn_to_action(uint8_t keycode)
     uint8_t layer = biton32(layer_state);
 
     dprint("keymap_fn-to_action");
-    dprintf(keycode);
-    dprintf(layer);
-    dprintf("\n");
+    //dprintf(keycode);
+    //dprintf(layer);
+    //dprintf("\n");
     action_t action;
     action.code = ACTION_NO;
 
