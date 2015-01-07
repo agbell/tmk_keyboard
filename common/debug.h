@@ -26,7 +26,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #define dprint(s)           do { print(s); } while (0)
 #define dprintln()          do { print_crlf(); } while (0)
-#define printf(fmt, ...)   do {  __xprintf(PSTR(fmt), ##__VA_ARGS__); } while (0)
+#define dprintf(fmt, ...)   do {  __xprintf(PSTR(fmt), ##__VA_ARGS__); } while (0)
 #define dmsg(s)             printf("%s at %s: %S\n", __FILE__, __LINE__, PSTR(s))
 
 /* DO NOT USE these anymore */
