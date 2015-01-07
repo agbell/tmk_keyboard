@@ -24,33 +24,33 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #ifndef NO_DEBUG
 
-#define dprint(s)           do { if (debug_enable) print(s); } while (0)
-#define dprintln()          do { if (debug_enable) print_crlf(); } while (0)
-#define dprintf(fmt, ...)   do { if (debug_enable) __xprintf(PSTR(fmt), ##__VA_ARGS__); } while (0)
-#define dmsg(s)             dprintf("%s at %s: %S\n", __FILE__, __LINE__, PSTR(s))
+#define dprint(s)           do { print(s); } while (0)
+#define dprintln()          do { print_crlf(); } while (0)
+#define printf(fmt, ...)   do {  __xprintf(PSTR(fmt), ##__VA_ARGS__); } while (0)
+#define dmsg(s)             printf("%s at %s: %S\n", __FILE__, __LINE__, PSTR(s))
 
 /* DO NOT USE these anymore */
-#define debug(s)                  do { if (debug_enable) print(s); } while (0)
-#define debugln(s)                do { if (debug_enable) print_crlf(); } while (0)
-#define debug_S(s)                do { if (debug_enable) print_S(s); } while (0)
-#define debug_P(s)                do { if (debug_enable) print_P(s); } while (0)
+#define debug(s)                  do { print(s); } while (0)
+#define debugln(s)                do {  print_crlf(); } while (0)
+#define debug_S(s)                do {  print_S(s); } while (0)
+#define debug_P(s)                do { print_P(s); } while (0)
 #define debug_msg(s)              do { \
     if (debug_enable) { \
         print(__FILE__); print(" at "); print_dec(__LINE__); print(" in "); print(": "); print(s); \
     } \
 } while (0)
-#define debug_dec(data)           do { if (debug_enable) print_dec(data); } while (0)
-#define debug_decs(data)          do { if (debug_enable) print_decs(data); } while (0)
-#define debug_hex4(data)          do { if (debug_enable) print_hex4(data); } while (0)
-#define debug_hex8(data)          do { if (debug_enable) print_hex8(data); } while (0)
-#define debug_hex16(data)         do { if (debug_enable) print_hex16(data); } while (0)
-#define debug_hex32(data)         do { if (debug_enable) print_hex32(data); } while (0)
-#define debug_bin8(data)          do { if (debug_enable) print_bin8(data); } while (0)
-#define debug_bin16(data)         do { if (debug_enable) print_bin16(data); } while (0)
-#define debug_bin32(data)         do { if (debug_enable) print_bin32(data); } while (0)
-#define debug_bin_reverse8(data)  do { if (debug_enable) print_bin_reverse8(data); } while (0)
-#define debug_bin_reverse16(data) do { if (debug_enable) print_bin_reverse16(data); } while (0)
-#define debug_bin_reverse32(data) do { if (debug_enable) print_bin_reverse32(data); } while (0)
+#define debug_dec(data)           do {  print_dec(data); } while (0)
+#define debug_decs(data)          do {  print_decs(data); } while (0)
+#define debug_hex4(data)          do {  print_hex4(data); } while (0)
+#define debug_hex8(data)          do {  print_hex8(data); } while (0)
+#define debug_hex16(data)         do {  print_hex16(data); } while (0)
+#define debug_hex32(data)         do {  print_hex32(data); } while (0)
+#define debug_bin8(data)          do {  print_bin8(data); } while (0)
+#define debug_bin16(data)         do {  print_bin16(data); } while (0)
+#define debug_bin32(data)         do {  print_bin32(data); } while (0)
+#define debug_bin_reverse8(data)  do {  print_bin_reverse8(data); } while (0)
+#define debug_bin_reverse16(data) do {  print_bin_reverse16(data); } while (0)
+#define debug_bin_reverse32(data) do {  print_bin_reverse32(data); } while (0)
 #define debug_hex(data)           debug_hex8(data)
 #define debug_bin(data)           debug_bin8(data)
 #define debug_bin_reverse(data)   debug_bin8(data)
