@@ -38,7 +38,7 @@ static const uint8_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         // right hand
              EQL,    6,   7,   8,   9,   0,   EQL,
              TAB,    Y,   U,   I,   O,   P,   FN0,
-                     H,   FN7, K,   L,   SCLN,FN3,
+                     H,   FN7, FN9,   L,   SCLN,FN3,
              DELETE, N,   M,   COMM,DOT, QUOT,FN4,
                        SPC,SPC,  SPC,SPC,SLSH,
         RBRC,ESC,
@@ -86,21 +86,21 @@ static const uint8_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         TRNS,
         TRNS,TRNS,J
     ),
-    KEYMAP(  // Layer 3 D_CTL lock
-          // left hand
+     KEYMAP(  // Layer  3 D_CTL lock
+         // left hand
         TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,
-        TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,
-        TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,
-        TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,
+        TRNS,FN0,FN1,FN2,FN3,FN4,TRNS,
+        TRNS,FN10,FN11,FN31,FN13,FN14,TRNS,
+        TRNS,FN20,FN21,FN22,FN23,FN24,
         TRNS,TRNS,TRNS,TRNS,TRNS,
                                       TRNS,TRNS,
                                            TRNS,
-                                 D,   TRNS,TRNS,
+                                 D,TRNS,TRNS,
         // right hand
              TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,
-             TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,
-                  TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,
-             TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,
+             TRNS,FN5, FN6, FN7, FN8, FN9, TRNS,
+                  FN15,FN16,FN17,FN18,FN19, TRNS,
+             TRNS,FN25,FN26,FN27,FN28,FN29 ,TRNS,
                        TRNS,TRNS,TRNS,TRNS,TRNS,
         TRNS,TRNS,
         TRNS,
@@ -119,7 +119,7 @@ static const uint8_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         // right hand
              TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,
              TRNS,FN5, FN6, FN7, FN8, FN9, TRNS,
-                  FN15,FN16,FN17,FN18,FN19, TRNS,
+                  FN15,FN16,FN30,FN18,FN19, TRNS,
              TRNS,FN25,FN26,FN27,FN28,FN29 ,TRNS,
                        TRNS,TRNS,TRNS,TRNS,TRNS,
         TRNS,TRNS,
@@ -189,12 +189,15 @@ static const uint16_t PROGMEM fn_actions[] = {
     [5] =  ACTION_LAYER_TAP_KEY(1, KC_F),                   // FN5
     [6] =   ACTION_MODS_TAP_KEY(MOD_LGUI, KC_ESC),            // FN6
     [7] =  ACTION_LAYER_TAP_KEY(2, KC_J),                     // FN7  
-    [8] =  ACTION_LAYER_TAP_KEY(1, KC_D),                         // FN8
-    [9] =  ACTION_LAYER_TAP_KEY(4, KC_K)                            //FN9
+    [8] =  ACTION_LAYER_TAP_KEY(3, KC_D),                         // FN8
+    [9] =  ACTION_LAYER_TAP_KEY(4, KC_K),                            //FN9
+    [31] =  ACTION_LAYER_TAP_KEY(1, KC_F),  
 };
 
 
 static const uint16_t PROGMEM fn_actions_ctl [] = {
+   [30] =  ACTION_LAYER_TAP_KEY(4, KC_K), //K return function
+   [31] =  ACTION_LAYER_TAP_KEY(3, KC_D),  // D return function
    [0] =   ACTION_MODS_KEY(MOD_LCTL, KC_Q),
    [1] =   ACTION_MODS_KEY(MOD_LCTL, KC_W),
    [2] =   ACTION_MODS_KEY(MOD_LCTL, KC_E),
@@ -224,9 +227,7 @@ static const uint16_t PROGMEM fn_actions_ctl [] = {
    [26] =   ACTION_MODS_KEY(MOD_LCTL, KC_M),
    [27] =   ACTION_MODS_KEY(MOD_LCTL, KC_X),
    [28] =   ACTION_MODS_KEY(MOD_LCTL, KC_X),
-   [29] =   ACTION_MODS_KEY(MOD_LCTL, KC_X),
-   [30] =   ACTION_MODS_KEY(MOD_LCTL, KC_X),
-   [31] =   ACTION_MODS_KEY(MOD_LCTL, KC_X)
+   [29] =   ACTION_MODS_KEY(MOD_LCTL, KC_X)
 };
 /*
  * user defined action function
@@ -306,27 +307,26 @@ void action_function(keyrecord_t *record, uint8_t id, uint8_t opt)
 action_t keymap_fn_to_action(uint8_t keycode)
 {
     uint8_t layer = biton32(layer_state);
-
-    dprint("keymap_fn-to_action");
-    //dprintf(keycode);
-    //dprintf(layer);
-    //dprintf("\n");
+   
     action_t action;
     action.code = ACTION_NO;
 
-    if ((layer == 1) && FN_INDEX(keycode) < FN_ACTIONS_CTL_SIZE) {
+    // CTRL Layer
+    if ((layer == 3 || layer == 4) && FN_INDEX(keycode) < FN_ACTIONS_CTL_SIZE) {
         action.code = pgm_read_word(&fn_actions_ctl[FN_INDEX(keycode)]);
-        
-        return action;
     } 
 
-    // by default, use fn_actions from default layer 0
+    // by default, use fn_actions from debug_hexdefault layer 0
     // this is needed to get mapping for same key, that was used switch to some layer,
     // to have possibility to switch layers back
-    if (action.code == ACTION_NO && FN_INDEX(keycode) < FN_ACTIONS_SIZE) {
+    else if (action.code == ACTION_NO && FN_INDEX(keycode) < FN_ACTIONS_SIZE) {
         action.code = pgm_read_word(&fn_actions[FN_INDEX(keycode)]);
     }
-
+    debug("FN:\t"); debug_dec(FN_INDEX(keycode));
+    debug("\tLayer: \t"); debug_dec(layer); 
+    debug("\tCode: \t"); debug_hex(action.code); 
+    debug("\n");
+    
     return action;
 }
 
