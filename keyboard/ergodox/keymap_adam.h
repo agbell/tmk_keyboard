@@ -89,40 +89,40 @@ static const uint8_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      KEYMAP(  // Layer  3 D_CTL lock
          // left hand
         TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,
-        TRNS,FN0,FN1,FN2,FN3,FN4,TRNS,
-        TRNS,FN10,FN11,FN31,FN13,FN14,TRNS,
-        TRNS,FN20,FN21,FN22,FN23,FN24,
+        TRNS,FN0, FN1, FN2, FN3, FN4, FN27,
+        TRNS,FN10,FN11,FN31,FN13,FN14,
+        TRNS,FN20,FN21,FN22,FN23,FN24,TRNS,
         TRNS,TRNS,TRNS,TRNS,TRNS,
-                                      TRNS,TRNS,
+                                      FN28,FN29,
                                            TRNS,
                                  D,TRNS,TRNS,
         // right hand
              TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,
-             TRNS,FN5, FN6, FN7, FN8, FN9, TRNS,
+             FN27,FN5, FN6, FN7, FN8, FN9, TRNS,
                   FN15,FN16,FN17,FN18,FN19, TRNS,
-             TRNS,FN25,FN26,FN27,FN28,FN29 ,TRNS,
+             TRNS,FN25,FN26,TRNS,TRNS,TRNS, TRNS,
                        TRNS,TRNS,TRNS,TRNS,TRNS,
-        TRNS,TRNS,
+        FN28,FN29,
         TRNS,
         TRNS,TRNS,D
     ),
      KEYMAP(  // Layer  4 K_CTL lock
          // left hand
         TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,
-        TRNS,FN0,FN1,FN2,FN3,FN4,TRNS,
-        TRNS,FN10,FN11,FN12,FN13,FN14,TRNS,
-        TRNS,FN20,FN21,FN22,FN23,FN24,
+        TRNS,FN0, FN1, FN2, FN3, FN4, FN27,
+        TRNS,FN10,FN11,FN12,FN13,FN14,
+        TRNS,FN20,FN21,FN22,FN23,FN24,TRNS,
         TRNS,TRNS,TRNS,TRNS,TRNS,
-                                      TRNS,TRNS,
+                                      FN28,FN29,
                                            TRNS,
                                  D,TRNS,TRNS,
         // right hand
              TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,
-             TRNS,FN5, FN6, FN7, FN8, FN9, TRNS,
+             FN27,FN5, FN6, FN7, FN8, FN9, TRNS,
                   FN15,FN16,FN30,FN18,FN19, TRNS,
-             TRNS,FN25,FN26,FN27,FN28,FN29 ,TRNS,
+             TRNS,FN25,FN26,TRNS,TRNS,TRNS,TRNS,
                        TRNS,TRNS,TRNS,TRNS,TRNS,
-        TRNS,TRNS,
+        FN29,FN28,
         TRNS,
         TRNS,TRNS,K
     ),
@@ -140,7 +140,7 @@ static const uint8_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                            TRNS,
                                  LCTL,LSFT,TRNS,
         // right hand
-             NO,  NO,  NO,  NO,  NO,  NO,  TRNS,
+             NO,  NO,  NO,  NO, NO,  NO,  TRNS,
              TRNS,NO,  NO,  NO,  NO,  NO,  TRNS,
                   NO,  NO,  NO,  NO,  NO,  TRNS,
              TRNS,NO,  NO,  NO,  NO,  NO,  TRNS,
@@ -166,7 +166,7 @@ static const uint8_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
              TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,
                        TRNS,TRNS,TRNS,TRNS,TRNS,
         TRNS,TRNS,
-        TRNS,
+        TRNS,]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]
         TRNS,TRNS,TRNS
     ),
 */
@@ -225,9 +225,9 @@ static const uint16_t PROGMEM fn_actions_ctl [] = {
    [24] =   ACTION_MODS_KEY(MOD_LCTL, KC_B),
    [25] =   ACTION_MODS_KEY(MOD_LCTL, KC_N),
    [26] =   ACTION_MODS_KEY(MOD_LCTL, KC_M),
-   [27] =   ACTION_MODS_KEY(MOD_LCTL, KC_X),
-   [28] =   ACTION_MODS_KEY(MOD_LCTL, KC_X),
-   [29] =   ACTION_MODS_KEY(MOD_LCTL, KC_X)
+   [27] =   ACTION_MODS_KEY(MOD_LCTL, KC_TAB),
+   [28] =   ACTION_MODS_KEY(MOD_LCTL, KC_ENTER),
+   [29] =   ACTION_MODS_KEY(MOD_LCTL, KC_SPACE)
 };
 /*
  * user defined action function
