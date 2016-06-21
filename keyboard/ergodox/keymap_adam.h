@@ -86,86 +86,6 @@ static const uint8_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         TRNS,
         TRNS,TRNS,J
     ),
-     KEYMAP(  // Layer  3 D_CTL lock
-         // left hand
-        TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,
-        TRNS,FN0, FN1, FN2, FN3, FN4, FN27,
-        TRNS,FN10,FN11,FN31,FN13,FN14,
-        TRNS,FN20,FN21,FN22,FN23,FN24,TRNS,
-        TRNS,TRNS,TRNS,TRNS,TRNS,
-                                      FN28,FN29,
-                                           TRNS,
-                                 D,TRNS,TRNS,
-        // right hand
-             TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,
-             FN27,FN5, FN6, FN7, FN8, FN9, TRNS,
-                  FN15,FN16,FN17,FN18,FN19, TRNS,
-             TRNS,FN25,FN26,TRNS,TRNS,TRNS, TRNS,
-                       TRNS,TRNS,TRNS,TRNS,TRNS,
-        FN28,FN29,
-        TRNS,
-        TRNS,TRNS,D
-    ),
-     KEYMAP(  // Layer  4 K_CTL lock
-         // left hand
-        TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,
-        TRNS,FN0, FN1, FN2, FN3, FN4, FN27,
-        TRNS,FN10,FN11,FN12,FN13,FN14,
-        TRNS,FN20,FN21,FN22,FN23,FN24,TRNS,
-        TRNS,TRNS,TRNS,TRNS,TRNS,
-                                      FN28,FN29,
-                                           TRNS,
-                                 D,TRNS,TRNS,
-        // right hand
-             TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,
-             FN27,FN5, FN6, FN7, FN8, FN9, TRNS,
-                  FN15,FN16,FN30,FN18,FN19, TRNS,
-             TRNS,FN25,FN26,TRNS,TRNS,TRNS,TRNS,
-                       TRNS,TRNS,TRNS,TRNS,TRNS,
-        FN29,FN28,
-        TRNS,
-        TRNS,TRNS,K
-    ),
-     KEYMAP(  // Layer  5 S_ALT lock
-         // left hand
-        TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,
-        TRNS,FN0, FN1, FN2, FN3, FN4, FN27,
-        TRNS,FN10,FN31,FN12,FN13,FN14,
-        TRNS,FN20,FN21,FN22,FN23,FN24,TRNS,
-        TRNS,TRNS,TRNS,TRNS,TRNS,
-                                      FN28,FN29,
-                                           TRNS,
-                                 S,TRNS,TRNS,
-        // right hand
-             TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,
-             FN27,FN5, FN6, FN7, FN8, FN9, TRNS,
-                  FN15,FN16,FN17,FN18,FN19, TRNS,
-             TRNS,FN25,FN26,TRNS,TRNS,TRNS, TRNS,
-                       TRNS,TRNS,TRNS,TRNS,TRNS,
-        FN28,FN29,
-        TRNS,
-        TRNS,TRNS,S
-    ),
-     KEYMAP(  // Layer  6 L_ALT lock
-         // left hand
-        TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,
-        TRNS,FN0, FN1, FN2, FN3, FN4, FN27,
-        TRNS,FN10,FN11,FN12,FN13,FN14,
-        TRNS,FN20,FN21,FN22,FN23,FN24,TRNS,
-        TRNS,TRNS,TRNS,TRNS,TRNS,
-                                      FN28,FN29,
-                                           TRNS,
-                                 L,TRNS,TRNS,
-        // right hand
-             TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,
-             FN27,FN5, FN6, FN7, FN8, FN9, TRNS,
-                  FN15,FN16,FN17,FN30,FN19, TRNS,
-             TRNS,FN25,FN26,TRNS,TRNS,TRNS,TRNS,
-                       TRNS,TRNS,TRNS,TRNS,TRNS,
-        FN29,FN28,
-        TRNS,
-        TRNS,TRNS,L
-    ),
 /*
     // templates to copy from
 
@@ -227,21 +147,12 @@ static const uint16_t PROGMEM fn_actions[] = {
     [3] =  ACTION_FUNCTION_TAP(RCTL_LPAREN),                   // FN3
     [4] =  ACTION_MODS_ONESHOT(MOD_LSFT),                    // FN4
     [5] =  ACTION_LAYER_TAP_KEY(1, KC_F),                   // FN5
-    [6] =   ACTION_MODS_TAP_KEY(MOD_LGUI, KC_ESC),            // FN6
-    
+    [6] =   ACTION_MODS_TAP_KEY(MOD_LGUI, KC_ESC),            // FN6    
     [7] =  ACTION_LAYER_TAP_KEY(2, KC_J),                     // FN7  
-    
     [8]   = ACTION_MODS_TAP_KEY(MOD_LCTL, KC_D),
-    //[8] =  ACTION_LAYER_TAP_KEY(3, KC_D),                         // FN8
-    
     [9]   = ACTION_MODS_TAP_KEY(MOD_RCTL, KC_K),
-    //[9] =  ACTION_LAYER_TAP_KEY(4, KC_K),                            //FN9
-   
     [10]   = ACTION_MODS_TAP_KEY(MOD_LALT, KC_S),   
-    //[10] =  ACTION_LAYER_TAP_KEY(5, KC_S),    // FN8
-    
     [11]   = ACTION_MODS_TAP_KEY(MOD_RALT, KC_L),   
-    //[11] =  ACTION_LAYER_TAP_KEY(6, KC_L),                            //FN9
     [31] =  ACTION_LAYER_TAP_KEY(1, KC_F),  
 };
 
@@ -314,7 +225,7 @@ static const uint16_t PROGMEM fn_actions_alt [] = {
    [27] =   ACTION_MODS_KEY(MOD_LALT, KC_TAB),
    [28] =   ACTION_MODS_KEY(MOD_LALT, KC_ENTER),
    [29] =   ACTION_MODS_KEY(MOD_LALT, KC_SPACE)
-};
+};fdfd
 /*
  * user defined action function
  */
