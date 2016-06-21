@@ -142,15 +142,17 @@ void process_action(keyrecord_t *record)
                     default:
                         if (event.pressed) {
                             if (tap_count > 0) {
-                                if (record->tap.interrupted) {
+/*
+                            if (record->tap.interrupted) {
                                     dprint("MODS_TAP: Tap: Cancel: add_mods\n");
                                     // ad hoc: set 0 to cancel tap
                                     record->tap.count = 0;
                                     register_mods(mods);
                                 } else {
+  */
                                     dprint("MODS_TAP: Tap: register_code\n");
                                     register_code(action.key.code);
-                                }
+    //                            }
                             } else {
                                 dprint("MODS_TAP: No tap: add_mods\n");
                                 register_mods(mods);

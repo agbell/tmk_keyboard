@@ -228,11 +228,20 @@ static const uint16_t PROGMEM fn_actions[] = {
     [4] =  ACTION_MODS_ONESHOT(MOD_LSFT),                    // FN4
     [5] =  ACTION_LAYER_TAP_KEY(1, KC_F),                   // FN5
     [6] =   ACTION_MODS_TAP_KEY(MOD_LGUI, KC_ESC),            // FN6
+    
     [7] =  ACTION_LAYER_TAP_KEY(2, KC_J),                     // FN7  
-    [8] =  ACTION_LAYER_TAP_KEY(3, KC_D),                         // FN8
-    [9] =  ACTION_LAYER_TAP_KEY(4, KC_K),                            //FN9
-    [10] =  ACTION_LAYER_TAP_KEY(5, KC_S),                         // FN8
-    [11] =  ACTION_LAYER_TAP_KEY(6, KC_L),                            //FN9
+    
+    [8]   = ACTION_MODS_TAP_KEY(MOD_LCTL, KC_D),
+    //[8] =  ACTION_LAYER_TAP_KEY(3, KC_D),                         // FN8
+    
+    [9]   = ACTION_MODS_TAP_KEY(MOD_RCTL, KC_K),
+    //[9] =  ACTION_LAYER_TAP_KEY(4, KC_K),                            //FN9
+   
+    [10]   = ACTION_MODS_TAP_KEY(MOD_LALT, KC_S),   
+    //[10] =  ACTION_LAYER_TAP_KEY(5, KC_S),    // FN8
+    
+    [11]   = ACTION_MODS_TAP_KEY(MOD_RALT, KC_L),   
+    //[11] =  ACTION_LAYER_TAP_KEY(6, KC_L),                            //FN9
     [31] =  ACTION_LAYER_TAP_KEY(1, KC_F),  
 };
 
