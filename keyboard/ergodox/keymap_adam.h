@@ -24,8 +24,8 @@ static const uint8_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KEYMAP(  // Layer 1 F lock
         // left hand
         TRNS,F1  ,F2  ,F3  ,F4  ,F5  ,F11,
-        TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,
-        TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,
+        TRNS,LBRC,TRNS,TRNS,TRNS,TRNS,TRNS,
+        TRNS,FN14,TRNS,TRNS,TRNS,TRNS,
         TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,
         TRNS,TRNS,TRNS,TRNS,TRNS,
                                       TRNS,TRNS,
@@ -33,8 +33,8 @@ static const uint8_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                  F,TRNS,TRNS,
         // right hand
              F12 ,F6  ,F7  ,F8  ,F9  ,F10 ,TRNS,
-             TRNS,TRNS,HOME,PGUP,TRNS,TRNS,TRNS,
-                  LEFT,DOWN,UP, RIGHT,TRNS,TRNS,
+             TRNS,TRNS,HOME,PGUP,TRNS,RBRC,TRNS,
+                  LEFT,DOWN,UP, RIGHT,FN15,TRNS,
              TRNS,TRNS,END,PGDOWN,TRNS,TRNS,TRNS,
                        TRNS,TRNS,TRNS,TRNS,TRNS,
         TRNS,TRNS,
@@ -44,7 +44,7 @@ static const uint8_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      KEYMAP(  // Layer 2 J lock
         // left hand
         TRNS,F1  ,F2  ,F3  ,F4  ,F5  ,F11,
-        TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,
+        TRNS,LBRC,TRNS,TRNS,TRNS,TRNS,TRNS,
         TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,
         TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,
         TRNS,TRNS,TRNS,TRNS,TRNS,
@@ -53,7 +53,7 @@ static const uint8_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                  J,TRNS,TRNS,
         // right hand
              F12 ,F6  ,F7  ,F8  ,F9  ,F10 ,TRNS,
-             TRNS,TRNS,HOME,PGUP,TRNS,TRNS,TRNS,
+             TRNS,TRNS,HOME,PGUP,TRNS,RBRC,TRNS,
                   LEFT,TRNS,UP, RIGHT,TRNS,TRNS,
              TRNS,TRNS,END,PGDOWN,TRNS,TRNS,TRNS,
                        TRNS,TRNS,TRNS,TRNS,TRNS,
@@ -116,8 +116,8 @@ enum function_id {
  * Fn action definition
  */
 static const uint16_t PROGMEM fn_actions[] = {
-    [0] =   ACTION_MODS_TAP_KEY(MOD_RALT, KC_RBRC),            // FN0  - CTRL + J
-    [1] =   ACTION_MODS_TAP_KEY(MOD_LALT, KC_LBRC),            // FN1 - CTRL + F
+    [0] =   ACTION_MODS_TAP_KEY(MOD_RALT, KC_RBRC),            
+    [1] =   ACTION_MODS_TAP_KEY(MOD_LALT, KC_LBRC),           
     
     [2] =  ACTION_FUNCTION_TAP(LCTL_LPAREN),                   // FN2 CTRL & Paren
     [3] =  ACTION_FUNCTION_TAP(RCTL_LPAREN),                   // FN3 CTRL & Paren
@@ -132,6 +132,9 @@ static const uint16_t PROGMEM fn_actions[] = {
     [11]   = ACTION_MODS_TAP_KEY(MOD_RALT, KC_L),
     [12]   = ACTION_MODS_TAP_KEY(MOD_LSFT, KC_A),   
     [13]   = ACTION_MODS_TAP_KEY(MOD_RSFT, KC_SCLN),
+    
+    [14]   = ACTION_MODS_KEY(MOD_LSFT, KC_LBRC),
+    [15]   = ACTION_MODS_KEY(MOD_LSFT, KC_RBRC),
 };
 
 /*
