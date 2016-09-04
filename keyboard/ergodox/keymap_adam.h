@@ -24,9 +24,9 @@ static const uint8_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KEYMAP(  // Layer 1 F lock
         // left hand
         TRNS,F1  ,F2  ,F3  ,F4  ,F5  ,F11,
-        TRNS,LBRC,TRNS,TRNS,TRNS,TRNS,TRNS,
+        TRNS,LBRC,GRAVE,FN18,TRNS,TRNS,TRNS,
         TRNS,FN14,TRNS,TRNS,TRNS,TRNS,
-        TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,
+        TRNS,BSLS,FN16,FN19,TRNS,TRNS,TRNS,
         TRNS,TRNS,TRNS,TRNS,TRNS,
                                       TRNS,TRNS,
                                            TRNS,
@@ -35,7 +35,7 @@ static const uint8_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
              F12 ,F6  ,F7  ,F8  ,F9  ,F10 ,TRNS,
              TRNS,TRNS,HOME,PGUP,TRNS,RBRC,TRNS,
                   LEFT,DOWN,UP, RIGHT,FN15,TRNS,
-             TRNS,TRNS,END,PGDOWN,TRNS,TRNS,TRNS,
+             TRNS,TRNS,END,PGDOWN,FN17,SLSH,TRNS,
                        TRNS,TRNS,TRNS,TRNS,TRNS,
         TRNS,TRNS,
         TRNS,
@@ -44,9 +44,9 @@ static const uint8_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      KEYMAP(  // Layer 2 J lock
         // left hand
         TRNS,F1  ,F2  ,F3  ,F4  ,F5  ,F11,
-        TRNS,LBRC,TRNS,TRNS,TRNS,TRNS,TRNS,
-        TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,
-        TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,
+        TRNS,LBRC,GRAVE,FN18,TRNS,TRNS,TRNS,
+        TRNS,FN14,TRNS,TRNS,TRNS,TRNS,
+        TRNS,BSLS,FN16,FN19,TRNS,TRNS,TRNS,
         TRNS,TRNS,TRNS,TRNS,TRNS,
                                       TRNS,TRNS,
                                            TRNS,
@@ -54,8 +54,8 @@ static const uint8_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         // right hand
              F12 ,F6  ,F7  ,F8  ,F9  ,F10 ,TRNS,
              TRNS,TRNS,HOME,PGUP,TRNS,RBRC,TRNS,
-                  LEFT,TRNS,UP, RIGHT,TRNS,TRNS,
-             TRNS,TRNS,END,PGDOWN,TRNS,TRNS,TRNS,
+                  LEFT,TRNS,UP, RIGHT,FN15,TRNS,
+             TRNS,TRNS,END,PGDOWN,TRNS,SLSH,TRNS,
                        TRNS,TRNS,TRNS,TRNS,TRNS,
         TRNS,TRNS,
         TRNS,
@@ -109,7 +109,9 @@ static const uint8_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 };
 enum function_id {
     LCTL_LPAREN,
-    RCTL_LPAREN
+    RCTL_LPAREN,
+    LSHIFT_LPAREN,
+    LSHIFT_RPAREN
 };
 
 /*
@@ -133,10 +135,16 @@ static const uint16_t PROGMEM fn_actions[] = {
     [12]   = ACTION_MODS_TAP_KEY(MOD_LSFT, KC_A),   
     [13]   = ACTION_MODS_TAP_KEY(MOD_RSFT, KC_SCLN),
     
-    [14]   = ACTION_MODS_KEY(MOD_LSFT, KC_LBRC),
-    [15]   = ACTION_MODS_KEY(MOD_LSFT, KC_RBRC),
+    [14]   = ACTION_FUNCTION_TAP(LSHIFT_LPAREN),//ACTION_MODS_KEY(MOD_LSFT, KC_LBRC),
+    [15]   = ACTION_FUNCTION_TAP(LSHIFT_RPAREN),//ACTION_MODS_KEY(MOD_LSFT, KC_RBRC),
+    
+    [16]   = ACTION_MODS_KEY(MOD_LSFT, KC_BSLS),
+    [17]   = ACTION_MODS_KEY(MOD_LSFT, KC_SLSH),
+    [18]   = ACTION_MODS_KEY(MOD_LSFT, KC_GRAVE),
+    [19]   = ACTION_MODS_KEY(MOD_LCTL, KC_C),
 };
-
+//LSHIFT_LPAREN,
+ //   LSHIFT_RPAREN
 /*
  * user defined action function
  */
@@ -201,9 +209,64 @@ void action_function(keyrecord_t *record, uint8_t id, uint8_t opt)
                 }
             }
             break;
+            case LSHIFT_LPAREN:
+            // Shift parentheses example: LShft + tap '('
+            // http://stevelosh.com/blog/2012/10/a-modern-space-cadet/#shift-parentheses
+            // http://geekhack.org/index.php?topic=41989.msg1304899#msg1304899
+            if (record->event.pressed) {
+                if (record->tap.count > 0 && !record->tap.interrupted) {
+                    if (record->tap.interrupted) {
+                        print("tap interrupted\n");
+                        register_mods(MOD_BIT(KC_LSHIFT));
+                    }
+                } else {
+                    register_mods(MOD_BIT(KC_LSHIFT));
+                }
+            } else {
+                if (record->tap.count > 0 && !(record->tap.interrupted)) {
+                    add_weak_mods(MOD_BIT(KC_LSHIFT));
+                    send_keyboard_report();
+                    register_code(KC_LBRACKET);
+                    unregister_code(KC_LBRACKET);
+                    del_weak_mods(MOD_BIT(KC_LSHIFT));
+                    send_keyboard_report();
+                    record->tap.count = 0;  // ad hoc: cancel tap
+                } else {
+                    unregister_mods(MOD_BIT(KC_LSHIFT));
+                }
+            }
+            break;
+            case LSHIFT_RPAREN:
+            // Shift parentheses example: LShft + tap '('
+            // http://stevelosh.com/blog/2012/10/a-modern-space-cadet/#shift-parentheses
+            // http://geekhack.org/index.php?topic=41989.msg1304899#msg1304899
+            if (record->event.pressed) {
+                if (record->tap.count > 0 && !record->tap.interrupted) {
+                    if (record->tap.interrupted) {
+                        print("tap interrupted\n");
+                        register_mods(MOD_BIT(KC_RSHIFT));
+                    }
+                } else {\
+                    register_mods(MOD_BIT(KC_RSHIFT));
+                }
+            } else {
+                if (record->tap.count > 0 && !(record->tap.interrupted)) {
+                    add_weak_mods(MOD_BIT(KC_RSHIFT));
+                    send_keyboard_report();
+                    register_code(KC_RBRACKET);
+                    unregister_code(KC_RBRACKET);
+                    del_weak_mods(MOD_BIT(KC_RSHIFT));
+                    send_keyboard_report();
+                    record->tap.count = 0;  // ad hoc: cancel tap
+                } else {
+                    unregister_mods(MOD_BIT(KC_RSHIFT));
+                }
+            }
+            break;
+   
     }
 }
-
+ 
 #define FN_ACTIONS_SIZE     (sizeof(fn_actions)   / sizeof(fn_actions[0]))
 
 
